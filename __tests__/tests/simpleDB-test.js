@@ -18,5 +18,15 @@ describe('make folder', () => {
       );
   });
 
-  // it('should create an object with a unique id with that id as the name of JSON file', ())
+  it('.save should take in an object and add a unique id then make a JSON file with that id as the name, then .get should use id to get that file and parse it', () => {
+    const databaseEntry = new SimpleDB(rootDir);
+
+    const objectToSave = { something: 'something' };
+    const expected = { id: expect.any(String), something: 'something' };
+
+    return databaseEntry
+      .save(objectToSave)
+      .then((id) => databaseEntry.get(id))
+      .then((obj) => expect(obj).toEqual(expected));
+  });
 });

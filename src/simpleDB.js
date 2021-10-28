@@ -5,7 +5,6 @@ const path = require('path');
 class SimpleDB {
   constructor(rootDir) {
     this.rootDir = rootDir;
-    mkdir(rootDir);
   }
 
   save(obj) {

@@ -1,4 +1,4 @@
-const { rm, readdir } = require('fs/promises');
+const { rm, readdir, mkdir } = require('fs/promises');
 const SimpleDB = require('../../src/simpleDB');
 
 describe('make folder', () => {
@@ -6,7 +6,9 @@ describe('make folder', () => {
 
   beforeEach(() => {
     //this is the fs version of rm -rf
-    return rm(rootDir, { force: true, recursive: true });
+    return rm(rootDir, { force: true, recursive: true }).then(() =>
+      mkdir(rootDir, { recursive: true })
+    );
   });
 
   it('should create a new objects directory in __tests__', () => {

@@ -2,7 +2,7 @@ const { rm, readdir } = require('fs/promises');
 const SimpleDB = require('../../src/simpleDB');
 
 describe('make folder', () => {
-  const rootDir = './__tests__/objects';
+  const rootDir = './storage/objects';
 
   beforeEach(() => {
     //this is the fs version of rm -rf
@@ -13,7 +13,7 @@ describe('make folder', () => {
     const expected = ['objects'];
     new SimpleDB(rootDir);
 
-    return readdir('./__tests__').then((folders) =>
+    return readdir('./storage').then((folders) =>
       expect(folders).toEqual(expect.arrayContaining(expected))
     );
   });

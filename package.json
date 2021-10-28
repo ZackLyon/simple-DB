@@ -13,7 +13,7 @@
   "jest": {
     "testEnvironment": "node",
     "watchPathIgnorePatterns": [
-      "objects"
+      "storage"
     ]
   },
   "keywords": [],

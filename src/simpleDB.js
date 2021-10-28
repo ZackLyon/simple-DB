@@ -1,4 +1,4 @@
-const { writeFile, readFile } = require('fs/promises');
+const { writeFile, readFile, readdir } = require('fs/promises');
 const { nanoid } = require('nanoid');
 const path = require('path');
 
@@ -27,6 +27,24 @@ class SimpleDB {
         }
         throw err;
       });
+  }
+
+  async getAll() {
+    const fileArray = await readdir(this.rootDir);
+
+    const promisesPromises = await Promise.all(
+      fileArray.map((file) =>
+        readFile(`${this.rootDir}/${file}`, JSON)
+          .then((result) => JSON.parse(result))
+          .catch((err) => {
+            if (err.code === 'ENOENT') {
+              return null;
+            }
+            throw err;
+          })
+      )
+    );
+    return promisesPromises;
   }
 }
 

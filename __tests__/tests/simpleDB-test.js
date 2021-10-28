@@ -34,4 +34,19 @@ describe('make folder', () => {
     const newDB = new SimpleDB(rootDir);
     return newDB.get(fakeId).then((results) => expect(results).toEqual(null));
   });
+
+  it.only('should return an array of objects from root directory in deserialized form', () => {
+    const expected = [
+      { something: 'something', id: expect.any(String) },
+      { somethingElse: 'somethingElse', id: expect.any(String) },
+    ];
+
+    const newDB = new SimpleDB(rootDir);
+
+    return newDB
+      .save({ something: 'something' })
+      .then(() => newDB.save({ somethingElse: 'somethingElse' }))
+      .then(() => newDB.getAll())
+      .then((results) => expect(results).toEqual(expected));
+  });
 });

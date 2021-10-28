@@ -1,4 +1,4 @@
-const { mkdir, writeFile, readFile } = require('fs/promises');
+const { writeFile, readFile } = require('fs/promises');
 const { nanoid } = require('nanoid');
 const path = require('path');
 

@@ -26,4 +26,10 @@ describe('make folder', () => {
       .then(() => newDB.get(newObj.id))
       .then((results) => expect(results).toEqual(newObj));
   });
+
+  it('should return null if get(id) does not find a file', () => {
+    const fakeId = 'looksFake';
+    const newDB = new SimpleDB(rootDir);
+    return newDB.get(fakeId).then((results) => expect(results).toEqual(null));
+  });
 });
